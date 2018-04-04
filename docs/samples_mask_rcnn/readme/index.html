@@ -1,0 +1,656 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://flystarhe.github.io/object-masking/samples_mask_rcnn/readme/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="en, jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-\.]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.1">
+    
+    
+      
+        <title>balloon - Object Masking</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.78aab2dc.css">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#balloon" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://flystarhe.github.io/object-masking" title="Object Masking" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Object Masking
+              </span>
+              <span class="md-header-nav__topic">
+                balloon
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/flystarhe/object-masking/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      flystarhe/object-masking
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Object Masking
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/flystarhe/object-masking/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      flystarhe/object-masking
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../datasets/" title="Datasets" class="md-nav__link">
+      Datasets
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../git/" title="git" class="md-nav__link">
+      git
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../lists/" title="Lists" class="md-nav__link">
+      Lists
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Samples mask rcnn
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Samples mask rcnn
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../balloon/" title="建立一个颜色填充过滤器" class="md-nav__link">
+      建立一个颜色填充过滤器
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        balloon
+      </label>
+    
+    <a href="./" title="balloon" class="md-nav__link md-nav__link--active">
+      balloon
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mask-r-cnn" title="Mask R-CNN" class="md-nav__link">
+    Mask R-CNN
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="主干架构" class="md-nav__link">
+    主干架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpn" title="区域建议网络(RPN)" class="md-nav__link">
+    区域建议网络(RPN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roi" title="ROI分类器和边界框回归器" class="md-nav__link">
+    ROI分类器和边界框回归器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#roi_1" title="ROI池化" class="md-nav__link">
+    ROI池化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="分割掩码" class="md-nav__link">
+    分割掩码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mask-r-cnn" title="Mask R-CNN" class="md-nav__link">
+    Mask R-CNN
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="主干架构" class="md-nav__link">
+    主干架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpn" title="区域建议网络(RPN)" class="md-nav__link">
+    区域建议网络(RPN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roi" title="ROI分类器和边界框回归器" class="md-nav__link">
+    ROI分类器和边界框回归器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#roi_1" title="ROI池化" class="md-nav__link">
+    ROI池化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="分割掩码" class="md-nav__link">
+    分割掩码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/flystarhe/object-masking/edit/master/docs/samples_mask_rcnn/readme.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="balloon">balloon<a class="headerlink" href="#balloon" title="Permanent link">&para;</a></h1>
+<p>先理解Mask R-CNN的工作原理,然后构建颜色填充器应用.<a href="https://github.com/matterport/Mask_RCNN/tree/master/samples/balloon">code</a>.</p>
+<p>实例分割是一种在像素层面识别目标轮廓的任务,相比其他相关任务,实例分割是较难解决的计算机视觉任务之一:</p>
+<p><img alt="" src="../readme01.jpg" /></p>
+<ul>
+<li>分类:这张图像中有一个气球</li>
+<li>语义分割:这些全是气球像素</li>
+<li>目标检测:这张图像中的这些位置上有7个气球</li>
+<li>实例分割:这些位置上有7个气球,并且这些像素分别属于每个气球</li>
+</ul>
+<h2 id="mask-r-cnn">Mask R-CNN<a class="headerlink" href="#mask-r-cnn" title="Permanent link">&para;</a></h2>
+<p>Mask R-CNN是一个两阶段的框架,第一个阶段扫描图像并生成提议(proposals,即有可能包含一个目标的区域),第二阶段分类提议并生成边界框和掩码.Mask R-CNN扩展自Faster R-CNN,由同一作者在去年提出.Faster R-CNN是一个流行的目标检测框架,Mask R-CNN将其扩展为实例分割框架.</p>
+<h3 id="_1">主干架构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>主干网络是一个标准的卷积神经网络(通常来说是ResNet50和ResNet101),作为特征提取器.底层检测的是低级特征(边缘和角等),较高层检测的是更高级的特征(汽车,人,天空等).</p>
+<p>经过主干网络的前向传播,图像从<code>1024x1024x3(RGB)</code>的张量被转换成形状为<code>32x32x2048</code>的特征图.该特征图将作为下一个阶段的输入.</p>
+<blockquote>
+<p>代码提示:主干网络在<code>resnet_graph()</code>函数中.代码支持<code>ResNet50</code>和<code>ResNet101</code>.</p>
+</blockquote>
+<p><img alt="" src="../readme02.jpg" /></p>
+<p>特征金字塔网络(FPN)是对主干网络的扩展,可以在多个尺度上更好地表征目标.FPN通过添加第二个金字塔提升了标准特征提取金字塔的性能,第二个金字塔可以从第一个金字塔选择高级特征并传递到底层上.通过这个过程,它允许每一级的特征都可以和高级,低级特征互相结合.</p>
+<blockquote>
+<p>代码提示:FPN在<code>MaskRCNN.build()</code>中创建,位于构建ResNet的部分之后.</p>
+</blockquote>
+<p>Mask R-CNN实现中使用的是<code>ResNet101+FPN</code>主干架构.</p>
+<h3 id="rpn">区域建议网络(RPN)<a class="headerlink" href="#rpn" title="Permanent link">&para;</a></h3>
+<p>RPN是一个轻量的神经网络,它用滑动窗口来扫描图像,并寻找存在目标的区域.RPN扫描的区域被称为anchor,在不同的尺寸和长宽比下,图像上会有将近20万个anchor,并且它们互相重叠以尽可能地覆盖图像.</p>
+<blockquote>
+<p>代码提示:RPN在<code>rpn_graph()</code>中创建.anchor的尺度和长宽比由<code>config.py</code>中的<code>RPN_ANCHOR_SCALES</code>和<code>RPN_ANCHOR_RATIOS</code>控制.</p>
+</blockquote>
+<p>RPN为每个anchor生成两个输出:</p>
+<ol>
+<li>anchor类别:前景或背景(FG/BG).前景类别意味着可能存在一个目标在anchor box中</li>
+<li>边框精调:前景anchor(或称正anchor)可能并没有完美地位于目标的中心.因此,RPN评估了delta输出<code>(x,y,宽,高)</code>的变化百分数,以精调anchor box来更好地拟合目标</li>
+</ol>
+<p>使用RPN的预测,我们可以选出最好地包含了目标的anchor,并对其位置和尺寸进行精调.如果有多个anchor互相重叠,我们将保留拥有最高前景分数的anchor,并舍弃余下的(非极大值抑制).然后我们就得到了最终的区域建议,并将其传递到下一个阶段.</p>
+<blockquote>
+<p>代码提示:<code>ProposalLayer</code>是一个自定义的Keras层,可以读取RPN的输出,选取最好的anchor,并应用边框精调.</p>
+</blockquote>
+<h3 id="roi">ROI分类器和边界框回归器<a class="headerlink" href="#roi" title="Permanent link">&para;</a></h3>
+<p>这个阶段是在由RPN提出的ROI上运行的.正如RPN一样,它为每个ROI生成了两个输出:</p>
+<ol>
+<li>类别:ROI中的目标的类别.和RPN不同(两个类别,前景或背景),这个网络更深并且可以将区域分类为具体的类别(人,车,椅子等).它还可以生成一个背景类别,然后就可以弃用ROI了</li>
+<li>边框精调:和RPN的原理类似,它的目标是进一步精调边框的位置和尺寸以将目标封装</li>
+</ol>
+<blockquote>
+<p>代码提示:分类器和边框回归器已在<code>fpn_classifier_graph()</code>中创建.</p>
+</blockquote>
+<h4 id="roi_1">ROI池化<a class="headerlink" href="#roi_1" title="Permanent link">&para;</a></h4>
+<p>在我们继续之前,需要先解决一些问题.分类器并不能很好地处理多种输入尺寸.它们通常只能处理固定的输入尺寸.但是,由于RPN中的边框精调步骤,ROI框可以有不同的尺寸.因此,我们需要用ROI池化来解决这个问题.</p>
+<p>ROI池化是指裁剪出特征图的一部分,然后将其重新调整为固定的尺寸.这个过程实际上和裁剪图片并将其缩放是相似的(在实现细节上有所不同).</p>
+<p>Mask R-CNN的作者提出了一种方法ROIAlign,在特征图的不同点采样,并应用双线性插值.在我们的实现中,为简单起见,我们使用TensorFlow的<code>crop_and_resize</code>函数来实现这个过程.</p>
+<blockquote>
+<p>代码提示:ROI池化在类<code>PyramidROIAlign</code>中实现.</p>
+</blockquote>
+<h3 id="_2">分割掩码<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>到此为止,我们得到的正是一个用于目标检测的Faster R-CNN.而分割掩码网络正是Mask R-CNN引入的附加网络.</p>
+<p>掩码分支是一个卷积网络,取ROI分类器选择的正区域为输入,并生成它们的掩码.其生成的掩码是低分辨率的:<code>28x28</code>像素.但它们是由浮点数表示的软掩码,相对于二进制掩码有更多的细节.掩码的小尺寸属性有助于保持掩码分支网络的轻量性.在训练过程中,我们将真实的掩码缩小为<code>28x28</code>来计算损失函数,在推断过程中,我们将预测的掩码放大为ROI边框的尺寸以给出最终的掩码结果,每个目标有一个掩码.</p>
+<blockquote>
+<p>代码提示:掩码分支网络在<code>build_fpn_mask_graph()</code>中.</p>
+</blockquote>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../balloon/" title="建立一个颜色填充过滤器" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                建立一个颜色填充过滤器
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.8eb9be28.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

@@ -1,0 +1,8 @@
+*.html
+!/docs/**/*
+/**/__pycache__/
+/**/.ipynb_checkpoints/
+/**/.DS_Store
+/**/tmps/
+log.web
+log.web.*

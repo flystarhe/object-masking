@@ -1,0 +1,715 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://flystarhe.github.io/object-masking/datasets/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="en, jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-\.]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.1">
+    
+    
+      
+        <title>Datasets - Object Masking</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#drive-digital-retinal-images-for-vessel-extraction" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://flystarhe.github.io/object-masking" title="Object Masking" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Object Masking
+              </span>
+              <span class="md-header-nav__topic">
+                Datasets
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/flystarhe/object-masking/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      flystarhe/object-masking
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Object Masking
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/flystarhe/object-masking/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      flystarhe/object-masking
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Datasets
+      </label>
+    
+    <a href="./" title="Datasets" class="md-nav__link md-nav__link--active">
+      Datasets
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#drive-digital-retinal-images-for-vessel-extraction" title="DRIVE: Digital Retinal Images for Vessel Extraction" class="md-nav__link">
+    DRIVE: Digital Retinal Images for Vessel Extraction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-sciences-institute" title="Image Sciences Institute" class="md-nav__link">
+    Image Sciences Institute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carvana-image-masking-challenge" title="Carvana Image Masking Challenge" class="md-nav__link">
+    Carvana Image Masking Challenge
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" title="Data" class="md-nav__link">
+    Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-i" title="Open-i" class="md-nav__link">
+    Open-i
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chest-x-ray-images" title="Chest X-ray images" class="md-nav__link">
+    Chest X-ray images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#montgomery-county-x-ray-set" title="Montgomery County X-ray Set" class="md-nav__link">
+    Montgomery County X-ray Set
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../git/" title="Git" class="md-nav__link">
+      Git
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../lists/" title="Lists" class="md-nav__link">
+      Lists
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Samples mask rcnn
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Samples mask rcnn
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples_mask_rcnn/balloon/" title="Balloon" class="md-nav__link">
+      Balloon
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples_mask_rcnn/readme/" title="Readme" class="md-nav__link">
+      Readme
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#drive-digital-retinal-images-for-vessel-extraction" title="DRIVE: Digital Retinal Images for Vessel Extraction" class="md-nav__link">
+    DRIVE: Digital Retinal Images for Vessel Extraction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-sciences-institute" title="Image Sciences Institute" class="md-nav__link">
+    Image Sciences Institute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carvana-image-masking-challenge" title="Carvana Image Masking Challenge" class="md-nav__link">
+    Carvana Image Masking Challenge
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" title="Data" class="md-nav__link">
+    Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-i" title="Open-i" class="md-nav__link">
+    Open-i
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chest-x-ray-images" title="Chest X-ray images" class="md-nav__link">
+    Chest X-ray images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#montgomery-county-x-ray-set" title="Montgomery County X-ray Set" class="md-nav__link">
+    Montgomery County X-ray Set
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/flystarhe/object-masking/edit/master/docs/datasets.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Datasets</h1>
+                
+                <h2 id="drive-digital-retinal-images-for-vessel-extraction">DRIVE: Digital Retinal Images for Vessel Extraction<a class="headerlink" href="#drive-digital-retinal-images-for-vessel-extraction" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>用于血管提取的数字视网膜图像  </p>
+</blockquote>
+<p>DRIVE数据库已经建立起来，能够比较研究视网膜图像中血管的分割。邀请研究团队在这个数据库上测试他们的算法，并通过这个<a href="https://www.isi.uu.nl/Research/Databases/DRIVE/index.html">网站</a>与其他研究人员分享结果。在这个<a href="https://www.isi.uu.nl/Research/Databases/DRIVE/index.html">页面</a>上，可以找到关于下载数据库和上传结果的说明，并且可以检查各种方法的结果。</p>
+<p>unzip to datasets dir:
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>#unzip DRIVE.zip -d /data2/object-masking/datasets/
+#tree -L 2 /data2/object-masking/datasets/DRIVE/
+/data2/object-masking/datasets/DRIVE/
+├── test
+│   ├── 1st_manual
+│   ├── 2nd_manual
+│   ├── images
+│   └── mask
+└── training
+    ├── 1st_manual
+    ├── images
+    └── mask
+</pre></div>
+</td></tr></table></p>
+<h3 id="image-sciences-institute">Image Sciences Institute<a class="headerlink" href="#image-sciences-institute" title="Permanent link">&para;</a></h3>
+<p>公开可用的注释图像数据库有利于比较研究。在这个页面上，我们提供了公共图像数据库的链接。这些数据库已经由Image Sciences Institute提供，或者在我们的支持下构建。</p>
+<ul>
+<li>AMIDA13：乳腺癌组织学图像有丝分裂检测中的挑战</li>
+<li>DRIVE：用于血管提取的数字视网膜图像</li>
+<li>EMPIRE10：肺部CT扫描的挑战</li>
+<li>PROSTATE：MR前列腺图像数据库</li>
+<li>SCR：胸部X光片的分割</li>
+<li>SLIVER07：腹部CT扫描中肝脏的分割</li>
+</ul>
+<h2 id="carvana-image-masking-challenge">Carvana Image Masking Challenge<a class="headerlink" href="#carvana-image-masking-challenge" title="Permanent link">&para;</a></h2>
+<p>在本次比赛中，您将面临挑战，要开发一种自动删除照相馆背景的算法。这将允许Carvana在各种背景上叠加汽车。您将分析照片的数据集，涵盖各种年份，制作和模型组合的不同车辆。<a href="https://www.kaggle.com/c/carvana-image-masking-challenge">url</a></p>
+<h3 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h3>
+<p>该数据集包含大量汽车图像(如<code>.jpg</code>文件)。每辆车都有16个图像，每一个都以不同的角度拍摄。每辆车都有一个唯一的ID，图像根据<code>id_01.jpg</code>，<code>id_02.jpg</code> .. <code>id_16.jpg</code>命名。除了图像之外，还提供了关于汽车制造，型号，年份和修剪的一些基本元数据。<a href="https://www.kaggle.com/c/carvana-image-masking-challenge/data">url</a></p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>/train
+train_masks.csv
+</pre></div>
+</td></tr></table>
+
+<h2 id="open-i">Open-i<a class="headerlink" href="#open-i" title="Permanent link">&para;</a></h2>
+<h3 id="chest-x-ray-images">Chest X-ray images<a class="headerlink" href="#chest-x-ray-images" title="Permanent link">&para;</a></h3>
+<p>download here: <a href="https://openi.nlm.nih.gov/faq.php">NLMCXR_png.tgz</a>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>#mkdir /data2/datasets/open-i
+#tar -zxf NLMCXR_png.tgz -C /data2/datasets/open-i
+#tree -L 2 /data2/datasets/open-i
+</pre></div>
+</td></tr></table>
+
+<h3 id="montgomery-county-x-ray-set">Montgomery County X-ray Set<a class="headerlink" href="#montgomery-county-x-ray-set" title="Permanent link">&para;</a></h3>
+<p>download here: <a href="https://openi.nlm.nih.gov/imgs/collections/NLM-MontgomeryCXRSet.zip">NLM-MontgomeryCXRSet.zip</a></p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>#unzip NLM-MontgomeryCXRSet.zip -d /data2/object-masking/datasets/tmps/
+#tree -L 2 /data2/object-masking/datasets/tmps/
+/data2/object-masking/datasets/tmps/
+├── __MACOSX
+│   └── MontgomerySet
+└── MontgomerySet
+    ├── ClinicalReadings
+    ├── CXR_png
+    ├── ManualMask
+    └── NLM-MontgomeryCXRSet-ReadMe.pdf
+</pre></div>
+</td></tr></table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                Home
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../git/" title="Git" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                Git
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+            <script src="../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

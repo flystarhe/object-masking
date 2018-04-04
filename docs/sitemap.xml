@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>https://flystarhe.github.io/object-masking/</loc>
+     <lastmod>2018-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://flystarhe.github.io/object-masking/datasets/</loc>
+     <lastmod>2018-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://flystarhe.github.io/object-masking/git/</loc>
+     <lastmod>2018-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://flystarhe.github.io/object-masking/lists/</loc>
+     <lastmod>2018-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+        
+    <url>
+     <loc>https://flystarhe.github.io/object-masking/samples_mask_rcnn/balloon/</loc>
+     <lastmod>2018-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://flystarhe.github.io/object-masking/samples_mask_rcnn/readme/</loc>
+     <lastmod>2018-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+</urlset>
