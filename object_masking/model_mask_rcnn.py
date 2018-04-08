@@ -46,7 +46,8 @@ def get_model(mode, config, model_dir, init_with="coco"):
     elif init_with == "coco":
         model_path = "https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5"
         model_path = get_file("mask_rcnn_coco.h5", model_path, cache_subdir="models")
-        model.load_weights(model_path, by_name=True)
+        model_exclude = ["mrcnn_class_logits", "mrcnn_bbox_fc", "mrcnn_bbox", "mrcnn_mask"]
+        model.load_weights(model_path, by_name=True, exclude=model_exclude)
     elif init_with == "last":
         model_path = model.find_last()[1]
         model.load_weights(model_path, by_name=True)
