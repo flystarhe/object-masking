@@ -189,29 +189,56 @@ def evaluation(model, config, dataset, image_ids=None, verbose=0):
     return APs, np.mean(APs)
 
 
-def demo_script_training():
-    classes = [("vgg_via", 1, "ggo")]
+def demo_script_training(classes=[("vgg_via", 1, "ggo")], init_with="coco"):
+    import sys
+    Libs = ["/data2/gits/object-masking"]
+    for item in Libs:
+        if item not in sys.path:
+            sys.path.insert(0, item)
+
+    from object_masking.model_mask_rcnn import get_dataset, MyConfig, get_model, training
+
     dataset_dir = "/data2/datasets/slyx/mjj_20180207/labeled_cd1/dataset00"
     dataset_val = get_dataset(dataset_dir, "", classes, "via_region_data_val.json")
     dataset_train = get_dataset(dataset_dir, "", classes, "via_region_data_train.json")
+
+    mydict = {"NUM_CLASSES": 2,
+              "IMAGE_MIN_DIM": 512,
+              "IMAGE_MAX_DIM": 512}
+    config = MyConfig(mydict, "log", 1, 4)
+    model = get_model("training", config, "mjj_20180207_labeled_cd1_dataset00", init_with=init_with)
 
     # pip install imgaug
     from imgaug import augmenters as iaa
     augmentation = [iaa.Fliplr(0.5), iaa.Affine(scale=(0.8, 1.2), order=0), iaa.Affine(rotate=(-10, 10), order=0)]
     augmentation = iaa.SomeOf((0, None), augmentation)
     augmentation = iaa.Sometimes(0.5, augmentation)
+    stages = [{"learning_rate": 0.001, "epochs": 50, "layers": "heads", "augmentation": augmentation},
+              {"learning_rate": 0.001, "epochs": 100, "layers": "4+", "augmentation": augmentation},
+              {"learning_rate": 0.0001, "epochs": 150, "layers": "all", "augmentation": augmentation}]
+    training(model, dataset_train, dataset_val, stages)
+
+
+def demo_script_test(images, classes=[("vgg_via", 1, "ggo")], init_with="last"):
+    import sys
+    Libs = ["/data2/gits/object-masking"]
+    for item in Libs:
+        if item not in sys.path:
+            sys.path.insert(0, item)
+
+    from object_masking.model_mask_rcnn import get_dataset, MyConfig, get_model, detect
+    from object_masking.model_mask_rcnn import detect_display_instances
 
     mydict = {"NUM_CLASSES": 2,
               "IMAGE_MIN_DIM": 512,
               "IMAGE_MAX_DIM": 512}
-    config = MyConfig(mydict, "none", 1, 4)
-    model = get_model("training", config, "tmps", init_with="coco")
+    config = MyConfig(mydict, "log", 1, 1)
+    model = get_model("inference", config, "mjj_20180207_labeled_cd1_dataset00", init_with=init_with)
 
-    stages = [{"learning_rate": 0.001, "epochs": 50, "layers": "heads", "augmentation": augmentation},
-              {"learning_rate": 0.001, "epochs": 100, "layers": "4+", "augmentation": augmentation},
-              {"learning_rate": 0.0001, "epochs": 150, "layers": "all", "augmentation": augmentation}]
-
-    training(model, dataset_train, dataset_val, stages)
+    class_names = [c[2] for c in classes]
+    results = detect(model, config, images, verbose=0)
+    for image, r in zip(images, results):
+        detect_display_instances(image, r, class_names)
 
 
 if __name__ == "__main__":
