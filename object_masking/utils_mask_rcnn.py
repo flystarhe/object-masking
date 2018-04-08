@@ -10,13 +10,13 @@ import numpy as np
 import skimage
 import skimage.draw
 # import mask_rcnn
-import utils
+import mrcnn.utils as mrcnn_utils
 
 
 ################################################################
 #  Dataset
 ################################################################
-class MyDataset(utils.Dataset):
+class MyDataset(mrcnn_utils.Dataset):
     def load_dataset(self, dataset_dir, subset, classes=None, format="vgg_via"):
         if format == "vgg_via":
             return self.load_dataset_vgg_via(dataset_dir, subset, classes)
