@@ -205,7 +205,7 @@ def demo_script_training(classes=[("vgg_via", 1, "ggo")], init_with="coco"):
     mydict = {"NUM_CLASSES": 2,
               "IMAGE_MIN_DIM": 512,
               "IMAGE_MAX_DIM": 512}
-    config = MyConfig(mydict, "log", 1, 4)
+    config = MyConfig(mydict, "ggo", 1, 1)
     model = get_model("training", config, "mjj_20180207_labeled_cd1_dataset00", init_with=init_with)
 
     # pip install imgaug
@@ -213,6 +213,7 @@ def demo_script_training(classes=[("vgg_via", 1, "ggo")], init_with="coco"):
     augmentation = [iaa.Fliplr(0.5), iaa.Affine(scale=(0.8, 1.2), order=0), iaa.Affine(rotate=(-10, 10), order=0)]
     augmentation = iaa.SomeOf((0, None), augmentation)
     augmentation = iaa.Sometimes(0.5, augmentation)
+    augmentation = None
     stages = [{"learning_rate": 0.001, "epochs": 50, "layers": "heads", "augmentation": augmentation},
               {"learning_rate": 0.001, "epochs": 100, "layers": "4+", "augmentation": augmentation},
               {"learning_rate": 0.0001, "epochs": 150, "layers": "all", "augmentation": augmentation}]
@@ -232,7 +233,7 @@ def demo_script_test(images, classes=[("vgg_via", 1, "ggo")], init_with="last"):
     mydict = {"NUM_CLASSES": 2,
               "IMAGE_MIN_DIM": 512,
               "IMAGE_MAX_DIM": 512}
-    config = MyConfig(mydict, "log", 1, 1)
+    config = MyConfig(mydict, "ggo", 1, 1)
     model = get_model("inference", config, "mjj_20180207_labeled_cd1_dataset00", init_with=init_with)
 
     class_names = [c[2] for c in classes]
