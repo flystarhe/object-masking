@@ -93,7 +93,7 @@ def dataset_display_boxes(dataset, image_ids=None):
         mrcnn_visualize.display_instances(image, bbox, mask, class_ids, dataset.class_names)
 
 
-def dataset_display_instances(config, dataset, image_ids=None, augmentation=None):
+def dataset_display_instances(config, dataset, image_ids=None, augmentation=None, show_mask=True, show_bbox=True):
     if image_ids is None:
         #np.random.choice(dataset.image_ids, 10)
         image_ids = dataset.image_ids
@@ -106,7 +106,10 @@ def dataset_display_instances(config, dataset, image_ids=None, augmentation=None
         mrcnn_model.log("gt_class_id", gt_class_id)
         mrcnn_model.log("gt_bbox", gt_bbox)
         mrcnn_model.log("gt_mask", gt_mask)
-        mrcnn_visualize.display_instances(image, gt_bbox, gt_mask, gt_class_id, dataset.class_names)
+        mrcnn_visualize.display_instances(image,
+                                          gt_bbox, gt_mask, gt_class_id,
+                                          dataset.class_names,
+                                          show_mask=show_mask, show_bbox=show_bbox)
 
 
 def training(model, dataset_train, dataset_val, stages=None):
@@ -130,12 +133,13 @@ def training(model, dataset_train, dataset_val, stages=None):
         model.train(dataset_train, dataset_val, **stage)
 
 
-def detect(model, config, images, verbose=0):
+def detect(model, config, images, verbose=0, simple=True):
     """
     images: List of images, potentially of different sizes
         - `model.detect(images, verbose)` require `len(images) == BATCH_SIZE`
     """
     results = []
+
     for image in images:
         if isinstance(image, str):
             image = skimage.io.imread(image)
@@ -143,31 +147,46 @@ def detect(model, config, images, verbose=0):
                 image = skimage.color.gray2rgb(image)
             if image.shape[-1] == 4:
                 image = image[..., :3]
-        results.append(model.detect([image], verbose)[0])
+
+        r = model.detect([image], verbose)[0]
+
+        if simple:
+            results.append(r)
+        else:
+            results.append((image, r))
+
     return results
 
 
-def detect_display_masks(image, r, class_names, limit=4):
-    if isinstance(image, str):
-        image = skimage.io.imread(image)
-        if image.ndim != 3:
-            image = skimage.color.gray2rgb(image)
-        if image.shape[-1] == 4:
-            image = image[..., :3]
-    mrcnn_visualize.display_top_masks(image, r["masks"], r["class_ids"], class_names, limit)
+def detect_display_masks(model, config, images, class_names, limit=4):
+    for image, r in detect(model, config, images, simple=False):
+        mrcnn_visualize.display_top_masks(image, r["masks"], r["class_ids"], class_names, limit)
 
 
-def detect_display_instances(image, r, class_names):
-    if isinstance(image, str):
-        image = skimage.io.imread(image)
-        if image.ndim != 3:
-            image = skimage.color.gray2rgb(image)
-        if image.shape[-1] == 4:
-            image = image[..., :3]
-    mrcnn_visualize.display_instances(image, r["rois"], r["masks"], r["class_ids"], class_names, scores=r["scores"])
+def detect_display_instances(model, config, images, class_names, show_mask=True, show_bbox=True):
+    for image, r in detect(model, config, images, simple=False):
+        mrcnn_visualize.display_instances(image,
+                                          r["rois"], r["masks"], r["class_ids"],
+                                          class_names,
+                                          scores=r["scores"],
+                                          show_mask=show_mask, show_bbox=show_bbox)
 
 
-def evaluation(model, config, dataset, image_ids=None, verbose=0):
+def detect_display_differences(model, config, dataset, show_mask=True, show_box=True, iou_threshold=0.5, score_threshold=0.5):
+    for image_id in dataset.image_ids:
+        print(dataset.image_reference(image_id))
+        image, image_meta, gt_class_id, gt_bbox, gt_mask =\
+            mrcnn_model.load_image_gt(dataset, config, image_id, use_mini_mask=False)
+        r = model.detect([image])[0]
+        mrcnn_visualize.display_differences(image,
+                                            gt_bbox, gt_class_id, gt_mask,
+                                            r['rois'], r['class_ids'], r['scores'], r['masks'],
+                                            dataset.class_names,
+                                            show_mask=show_mask, show_box=show_box,
+                                            iou_threshold=iou_threshold, score_threshold=score_threshold)
+
+
+def evaluation(model, config, dataset, image_ids=None, verbose=0, iou_threshold=0.5):
     APs = []
     if image_ids is None:
         #np.random.choice(dataset.image_ids, 10)
@@ -178,15 +197,16 @@ def evaluation(model, config, dataset, image_ids=None, verbose=0):
             mrcnn_model.load_image_gt(dataset, config, image_id, use_mini_mask=False)
         molded_images = np.expand_dims(mrcnn_model.mold_image(image, config), 0)
         # Run object detection
-        results = model.detect([image], verbose)
-        r = results[0]
+        r = model.detect([image], verbose)[0]
         # Compute AP
         if r["class_ids"].size == 0:
             continue
         AP, precisions, recalls, overlaps =\
-            mrcnn_utils.compute_ap(gt_bbox, gt_class_id, gt_mask, r["rois"], r["class_ids"], r["scores"], r["masks"])
+            mrcnn_utils.compute_ap(gt_bbox, gt_class_id, gt_mask,
+                                   r["rois"], r["class_ids"], r["scores"], r["masks"],
+                                   iou_threshold=iou_threshold)
         APs.append(AP)
-    return APs, np.mean(APs)
+    return {"APs": APs, "mAP": np.mean(APs)}
 
 
 def demo_script_training(classes=[("vgg_via", 1, "ggo")], init_with="coco"):
@@ -196,7 +216,8 @@ def demo_script_training(classes=[("vgg_via", 1, "ggo")], init_with="coco"):
         if item not in sys.path:
             sys.path.insert(0, item)
 
-    from object_masking.model_mask_rcnn import get_dataset, MyConfig, get_model, training
+    from object_masking.model_mask_rcnn import get_dataset, MyConfig, get_model
+    from object_masking.model_mask_rcnn import training
 
     dataset_dir = "/data2/datasets/slyx/mjj_20180207/labeled_cd1/dataset00"
     dataset_val = get_dataset(dataset_dir, "", classes, "via_region_data_val.json")
@@ -220,6 +241,29 @@ def demo_script_training(classes=[("vgg_via", 1, "ggo")], init_with="coco"):
     training(model, dataset_train, dataset_val, stages)
 
 
+def demo_script_val(classes=[("vgg_via", 1, "ggo")], init_with="last"):
+    import sys
+    Libs = ["/data2/gits/object-masking"]
+    for item in Libs:
+        if item not in sys.path:
+            sys.path.insert(0, item)
+
+    from object_masking.model_mask_rcnn import get_dataset, MyConfig, get_model
+    from object_masking.model_mask_rcnn import detect_display_differences, evaluation
+
+    dataset_dir = "/data2/datasets/slyx/mjj_20180207/labeled_cd1/dataset00"
+    dataset_val = get_dataset(dataset_dir, "", classes, "via_region_data_val.json")
+
+    mydict = {"NUM_CLASSES": 2,
+              "IMAGE_MIN_DIM": 512,
+              "IMAGE_MAX_DIM": 512}
+    config = MyConfig(mydict, "ggo", 1, 1)
+    model = get_model("inference", config, "mjj_20180207_labeled_cd1_dataset00", init_with=init_with)
+
+    detect_display_differences(model, config, dataset_val, show_mask=False, show_box=False, iou_threshold=0.5, score_threshold=0.5)
+    print(evaluation(model, config, dataset_val, image_ids=None, verbose=0, iou_threshold=0.5))
+
+
 def demo_script_test(images, classes=[("vgg_via", 1, "ggo")], init_with="last"):
     import sys
     Libs = ["/data2/gits/object-masking"]
@@ -227,7 +271,7 @@ def demo_script_test(images, classes=[("vgg_via", 1, "ggo")], init_with="last"):
         if item not in sys.path:
             sys.path.insert(0, item)
 
-    from object_masking.model_mask_rcnn import get_dataset, MyConfig, get_model, detect
+    from object_masking.model_mask_rcnn import get_dataset, MyConfig, get_model
     from object_masking.model_mask_rcnn import detect_display_instances
 
     mydict = {"NUM_CLASSES": 2,
@@ -236,10 +280,8 @@ def demo_script_test(images, classes=[("vgg_via", 1, "ggo")], init_with="last"):
     config = MyConfig(mydict, "ggo", 1, 1)
     model = get_model("inference", config, "mjj_20180207_labeled_cd1_dataset00", init_with=init_with)
 
-    class_names = [c[2] for c in classes]
-    results = detect(model, config, images, verbose=0)
-    for image, r in zip(images, results):
-        detect_display_instances(image, r, class_names)
+    class_names = ["bg"] + [c[2] for c in classes]
+    detect_display_instances(model, config, images, class_names, show_mask=False, show_bbox=False)
 
 
 if __name__ == "__main__":
