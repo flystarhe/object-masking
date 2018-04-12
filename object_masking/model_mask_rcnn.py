@@ -231,7 +231,7 @@ def demo_script_training(classes=[("vgg_via", 1, "ggo")], init_with="coco"):
 
     # pip install imgaug
     from imgaug import augmenters as iaa
-    augmentation = [iaa.Fliplr(0.5), iaa.Affine(scale=(0.9, 1.1), order=0), iaa.Affine(rotate=(-5, 5), order=0)]
+    augmentation = [iaa.Fliplr(0.5), iaa.Affine(scale=(0.8, 1.2), order=0), iaa.Affine(rotate=(-15, 15), order=0)]
     augmentation = iaa.SomeOf((0, None), augmentation)
     augmentation = iaa.Sometimes(0.5, augmentation)
     #augmentation = None
