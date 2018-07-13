@@ -1,8 +1,8 @@
-*.html
 !/docs/**/*
+/**/tmps/
 /**/__pycache__/
 /**/.ipynb_checkpoints/
 /**/.DS_Store
-/**/tmps/
+/docs_md/**/*.html
 log.web
 log.web.*
